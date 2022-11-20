@@ -1,5 +1,5 @@
-import GoalInput from './components/GoalInput';
+import GoalPage from './components/GoalPage';
 
 export default function App() {
-  return <GoalInput />;
+  return <GoalPage />;
 }

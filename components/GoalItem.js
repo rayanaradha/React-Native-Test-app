@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View,Pressable } from 'react-native';
 
 export default function GoalList(props) {
 
   return (
-    <View style={styles.Listcontainer}>
-          <Text key={props.data.index} style={styles.List}>{props.data.item}</Text>
-    </View>
+    <Pressable  on onPress={props.onDeleteItem}>
+        <View style={styles.Listcontainer}>
+            <Text key={props.data.index} style={styles.List}>{props.data.item}</Text>
+        </View>
+    </Pressable>
   );
 }
 
