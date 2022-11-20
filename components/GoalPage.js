@@ -10,14 +10,16 @@ export default function GoalPage() {
     setGoalList((goalList)=>[...goalList,goal]);
   }
 
-  function deleteItemHnadler() {
-    console.log("Deleted");
+  function deleteItemHnadler(id) {
+    setGoalList ((goalList) => {
+      return goalList.filter((goal,index)=> index!=id);
+    })
   }
 
   return (
     <View style={styles.appContainer}>
+      <GoalInput onAddGoal={addGoalHandler}/>
       <View style={styles.Listcontainer}>
-         <GoalInput onAddGoal={addGoalHandler}/>
             <FlatList 
                 data={goalList} 
                 renderItem={ (itemData) => {

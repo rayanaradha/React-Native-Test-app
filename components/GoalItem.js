@@ -3,7 +3,7 @@ import { StyleSheet, Text, View,Pressable } from 'react-native';
 export default function GoalList(props) {
 
   return (
-    <Pressable  on onPress={props.onDeleteItem}>
+    <Pressable  on onPress={props.onDeleteItem.bind(this, props.data.index)}>
         <View style={styles.Listcontainer}>
             <Text key={props.data.index} style={styles.List}>{props.data.item}</Text>
         </View>
