@@ -1,32 +1,46 @@
 import { useState } from 'react';
 import GoalItem from './GoalItem';
 import GoalInput from './GoalInput';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Button } from 'react-native';
 
 export default function GoalPage() {
   const [goalList, setGoalList] = useState([]);
+  const [modalVisible, setmodalVisible] = useState(false);
+
+  function startAddGoalHnadler() {
+    setmodalVisible(true);
+  }
+
+  function endAddGoalHnadler() {
+    setmodalVisible(false);
+  }
 
   function addGoalHandler(goal) {
-    setGoalList((goalList)=>[...goalList,goal]);
+    setGoalList((goalList) => [...goalList, goal]);
   }
 
   function deleteItemHnadler(id) {
-    setGoalList ((goalList) => {
-      return goalList.filter((goal,index)=> index!=id);
-    })
+    setGoalList((goalList) => {
+      return goalList.filter((goal, index) => index != id);
+    });
   }
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler}/>
+      <Button
+        title="Add New Goal"
+        onPress={startAddGoalHnadler}
+      />
+      <GoalInput onAddGoal={addGoalHandler} showModel={modalVisible} closeModel={endAddGoalHnadler}/>
       <View style={styles.Listcontainer}>
-            <FlatList 
-                data={goalList} 
-                renderItem={ (itemData) => {
-                return(
-                    <GoalItem data = {itemData} onDeleteItem={deleteItemHnadler}/>
-                );
-            }}/>
+        <FlatList
+          data={goalList}
+          renderItem={(itemData) => {
+            return (
+              <GoalItem data={itemData} onDeleteItem={deleteItemHnadler} />
+            );
+          }}
+        />
       </View>
     </View>
   );

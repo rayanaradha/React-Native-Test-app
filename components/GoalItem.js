@@ -3,23 +3,23 @@ import { StyleSheet, Text, View,Pressable } from 'react-native';
 export default function GoalList(props) {
 
   return (
-    <Pressable  on onPress={props.onDeleteItem.bind(this, props.data.index)}>
         <View style={styles.Listcontainer}>
-            <Text key={props.data.index} style={styles.List}>{props.data.item}</Text>
+            <Pressable android_ripple={{color: '#dddddd'}} onPress={props.onDeleteItem.bind(this, props.data.index)}>
+                <Text key={props.data.index} style={styles.List}>{props.data.item}</Text>
+            </Pressable>
         </View>
-    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   Listcontainer: {
     flex: 5,
+    borderRadius: 6,
+    backgroundColor: '#5e0acc',
+    margin : 10,
   },
   List: {
-   margin : 10,
    padding:8,
-   borderRadius: 6,
-   backgroundColor: '#5e0acc',
    color: 'white',
   },
 });
