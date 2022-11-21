@@ -2,6 +2,7 @@ import { useState } from 'react';
 import GoalItem from './GoalItem';
 import GoalInput from './GoalInput';
 import { StyleSheet, View, FlatList, Button } from 'react-native';
+import { StatusBar } from 'react-native';
 
 export default function GoalPage() {
   const [goalList, setGoalList] = useState([]);
@@ -26,6 +27,8 @@ export default function GoalPage() {
   }
 
   return (
+    <>
+    <StatusBar style='light'/>
     <View style={styles.appContainer}>
       <Button
         title="Add New Goal"
@@ -43,6 +46,7 @@ export default function GoalPage() {
         />
       </View>
     </View>
+    </>
   );
 }
 
@@ -51,8 +55,10 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16,
     flex: 1,
+    backgroundColor: '#1e085a'
   },
   Listcontainer: {
     flex: 5,
+    paddingTop: 30,
   },
 });
