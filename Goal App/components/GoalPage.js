@@ -1,64 +1,52 @@
 import { useState } from 'react';
-import GoalItem from './GoalItem';
-import GoalInput from './GoalInput';
-import { StyleSheet, View, FlatList, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'react-native';
+import BottomNav from './BottomNav';
+import HomePage from './HomePage';
+import FirstPage from './Firstpage';
+import SecondPage from './Secondpage';
+import ThirdPage from './ThirdPage ';
 
 export default function GoalPage() {
-  const [goalList, setGoalList] = useState([]);
-  const [modalVisible, setmodalVisible] = useState(false);
-
-  function startAddGoalHnadler() {
-    setmodalVisible(true);
+  const [page, setPage] = useState(0);
+  function changePage(id) {
+    setPage(id);
   }
 
-  function endAddGoalHnadler() {
-    setmodalVisible(false);
-  }
-
-  function addGoalHandler(goal) {
-    setGoalList((goalList) => [...goalList, goal]);
-  }
-
-  function deleteItemHnadler(id) {
-    setGoalList((goalList) => {
-      return goalList.filter((goal, index) => index != id);
-    });
-  }
+  const pageRender = () => {
+    switch (page) {
+      case 0:
+        return <HomePage />;
+      case 1:
+        return <FirstPage />;
+      case 2:
+        return <SecondPage />;
+      case 3:
+        return <ThirdPage />;
+      default:
+        return <HomePage />;
+    }
+  };
 
   return (
     <>
-    <StatusBar style='light'/>
-    <View style={styles.appContainer}>
-      <Button
-        title="Add New Goal"
-        onPress={startAddGoalHnadler}
-      />
-      <GoalInput onAddGoal={addGoalHandler} showModel={modalVisible} closeModel={endAddGoalHnadler}/>
-      <View style={styles.Listcontainer}>
-        <FlatList
-          data={goalList}
-          renderItem={(itemData) => {
-            return (
-              <GoalItem data={itemData} onDeleteItem={deleteItemHnadler} />
-            );
-          }}
-        />
+      <StatusBar style="light" />
+      <View style={styles.pageContainer}>{pageRender()}</View>
+      <View style={styles.Navbar}>
+        <BottomNav onChangePage={changePage} />
       </View>
-    </View>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  appContainer: {
-    paddingTop: 50,
-    paddingHorizontal: 16,
-    flex: 1,
-    backgroundColor: '#1e085a'
+  pageContainer: {
+    flex: 9,
   },
-  Listcontainer: {
-    flex: 5,
-    paddingTop: 30,
+  Navbar: {
+    flex: 1,
+    borderTopColor: '#512DA8',
+    borderTopWidth: 0.3,
+    marginTop: 10,
   },
 });
